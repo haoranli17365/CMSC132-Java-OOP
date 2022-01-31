@@ -131,7 +131,7 @@ public class StudentTests {
             fail("While deleting 2 in an AVL-1 tree, we encountered a " + t.getClass().getSimpleName() + " with message: " +
                     t.getMessage() + ".");
         }
-
+        tree.printTree(tree.getRootNode());
         assertEquals("In an AVL-1 tree where we deleted the root's singleton left child, we encountered an unexpected new root.",
                 Integer.valueOf(7), tree.getRoot());
         assertEquals("In an AVL-1 tree where we deleted the root's singleton left child,  the tree's new height was not the expected one.",
@@ -166,4 +166,55 @@ public class StudentTests {
         assertTrue("After inserting " + NUMS + " - many random elements, it was determined that our AVL-3 tree" +
                 " did not satisfy the AVL-3 property!", tree.isAVLGBalanced());
     }
+
+    @Test
+    public void testInsertion() throws InvalidBalanceException{
+        tree = new AVLGTree<>(1);
+        tree.insert(12);
+        tree.insert(5);
+        tree.insert(8);
+        tree.insert(4);
+        tree.insert(2);
+        assertEquals(2, tree.getHeight());
+        tree.printTree(tree.getRootNode());
+        assertEquals(true,tree.isAVLGBalanced());
+    }
+    @Test
+    public void testSearch() throws InvalidBalanceException{
+        tree = new AVLGTree<>(1);
+        tree.insert(12);
+        tree.insert(5);
+        tree.insert(8);
+        tree.insert(4);
+        tree.insert(2);
+    }
+    @Test
+    public void testIntertDelete() throws InvalidBalanceException, EmptyTreeException{
+        tree = new AVLGTree<>(1);
+        tree.insert(50);
+        tree.insert(5);
+        tree.insert(8);
+        tree.insert(4);
+        tree.insert(2);
+        tree.insert(70);
+        tree.insert(45);
+        tree.printTree(tree.getRootNode());
+        try {
+            tree.delete(8);
+            tree.delete(50);
+            tree.delete(100);
+            tree.delete(70);
+            tree.delete(2);
+            tree.delete(5);
+            tree.delete(45);
+            tree.delete(4);
+        }catch(Throwable t){
+            fail("While deleting 2 in an AVL-1 tree, we encountered a " + t.getClass().getSimpleName() + " with message: " +
+                    t.getMessage() + ".");
+        }
+        System.out.println(tree.getCount());
+        tree.printTree(tree.getRootNode());
+        
+    }
+
 }
